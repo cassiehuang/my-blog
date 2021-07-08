@@ -1,7 +1,7 @@
 ##########################################
 # Site Settings
 
-baseURL = "http://cassiehuang.github.io"
+baseURL = "https://cassiehuang.github.io"
 title = "黄敏的个人博客"
 languageCode = "zh"
 hasCJKLanguage = true
@@ -48,13 +48,13 @@ uglyURLs = false
 
 # URL structure
 [permalinks]
-#    categories = "/categories/:slug/"
-    tags = "/tags/:slug/"
+    # categories = "/categories/:slug/"
+    articles = "/articles/:slug/"
 
 # Taxonomies
 [taxonomies]
-#    category = "categories"
-    tag = "tags"
+    article = "articles"
+    # tag = "tags"
 
 # Modified date
 [frontmatter]
@@ -102,7 +102,7 @@ uglyURLs = false
     # Avatar
     avatar = "/icons/apple-touch-icon.png"
     # Personal website, default: baseURL
-    website = "https://io-oi.me/"
+    website = "https://cassiehuang.github.io/"
     # Twitter
     # twitter = "reuixiy"
 
@@ -112,15 +112,8 @@ uglyURLs = false
     includeNewer = true
     toLower = true
     [[related.indices]]
-        name = "categories"
+        name = "articles"
         weight = 100
-    [[related.indices]]
-        name = "tags"
-        weight = 95
-    [[related.indices]]
-        name = "date"
-        weight = 10
-        pattern = "2006"
 
 # MIME type of Atom
 [mediaTypes."application/atom+xml"]
@@ -199,18 +192,18 @@ uglyURLs = false
 
 [menu]
     ## Menu bar
-    # [[menu.main]]
-    #     url = "/"
-    #     name = "Home"
-    #     weight = 1
-    #     pre = "internal"
-    #     post = "home"
+    [[menu.main]]
+        url = "/"
+        name = "主页"
+        weight = 1
+        pre = "internal"
+        post = ""
     [[menu.main]]
         url = "/articles/"
         name = "技术文章"
         weight = 1
         pre = "internal"
-        post = "articles"
+        post = ""
     #[[menu.main]]
     #    url = "/categories/"
     #    name = "Categories"
@@ -230,13 +223,13 @@ uglyURLs = false
     #   pre = "internal"
     #   post = "user-circle"
     [[menu.main]]
-        weight = 6
+        weight = 2
         identifier = "theme-switcher"
     [[menu.main]]
-        weight = 7
+        weight = 3
         identifier = "lang-switcher"
     [[menu.main]]
-        weight = 8
+        weight = 4
         identifier = "search"
         post = "search"
 
@@ -349,11 +342,11 @@ uglyURLs = false
     siteLogo = "/icons/apple-touch-icon.png"
     # Note: used for JSON-LD, Open Graph
 
-    siteDescription = "MemE is a powerful and highly customizable GoHugo theme for personal blogs."
+    siteDescription = "黄敏的个人博客用于记录工作和生活."
     # Note: used for HTML head meta, JSON-LD,
     #       Open Graph, Atom, RSS
 
-    siteCreatedTime = "1969-07-20T20:17:43+00:00"
+    siteCreatedTime = "2020-07-20T20:17:43+00:00"
     # ATTENTION: keep this format, change
     #            the number
 
@@ -1148,7 +1141,7 @@ uglyURLs = false
     ######################################
     # Post Share
 
-    enablePostShare = true
+    enablePostShare = false
 
     displayPostShare = true
     # Note: *global settings*
@@ -1157,7 +1150,7 @@ uglyURLs = false
 
     displayShareOnText = false
 
-    shareOnTwitter = true
+    shareOnTwitter = false
     shareOnFacebook = true
     shareOnLinkedIn = true
     shareOnTelegram = true

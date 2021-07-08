@@ -8,8 +8,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>黄敏的个人博客</title>
-        <link>http://cassiehuang.github.io/</link>
-        <description>MemE is a powerful and highly customizable GoHugo theme for personal blogs.</description>
+        <link>https://cassiehuang.github.io/</link>
+        <description>黄敏的个人博客用于记录工作和生活.</description>
         <generator>Hugo 0.78.2 https://gohugo.io/</generator>
         
             <language>zh</language>
@@ -21,9 +21,9 @@
             <webMaster>2694915367@qq.com (黄敏)</webMaster>
         
         
-        <lastBuildDate>Fri, 02 Jul 2021 10:26:37 &#43;0800</lastBuildDate>
+        <lastBuildDate>Thu, 08 Jul 2021 14:52:59 &#43;0800</lastBuildDate>
         
-            <atom:link rel="self" type="application/rss&#43;xml" href="http://cassiehuang.github.io/rss.xml" />
+            <atom:link rel="self" type="application/rss&#43;xml" href="https://cassiehuang.github.io/rss.xml" />
         
         
     </channel>
