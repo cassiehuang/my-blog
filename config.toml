@@ -3,10 +3,10 @@
 
 baseURL = "https://cassiehuang.github.io"
 title = "黄敏的个人博客"
-languageCode = "zh"
+languageCode = "zh-CN"
 hasCJKLanguage = true
 # Copyright information (Markdown supported)
-#copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
+copyright = "在保留本文作者及本文链接的前提下，非商业用途随意转载分享"
 
 # Name of theme
 theme = "meme"
@@ -48,12 +48,11 @@ uglyURLs = false
 
 # URL structure
 [permalinks]
-    # categories = "/categories/:slug/"
-    articles = "/articles/:slug/"
+    # tags = "/tags/:slug/"
 
 # Taxonomies
 [taxonomies]
-    article = "articles"
+    # article = "articles"
     # tag = "tags"
 
 # Modified date
@@ -87,7 +86,7 @@ uglyURLs = false
         lineNumbersInTable = true
         noClasses = false
     [markup.tableOfContents]
-        startLevel = 2
+        startLevel = 1
         endLevel = 6
         ordered = true
 
@@ -112,8 +111,12 @@ uglyURLs = false
     includeNewer = true
     toLower = true
     [[related.indices]]
-        name = "articles"
+        name = "tags"
         weight = 100
+    [[related.indices]]
+        name = "date"
+        weight = 10
+        pattern = "2006"
 
 # MIME type of Atom
 [mediaTypes."application/atom+xml"]
@@ -192,46 +195,31 @@ uglyURLs = false
 
 [menu]
     ## Menu bar
-    [[menu.main]]
+    [[menu.links]]
         url = "/"
         name = "主页"
         weight = 1
         pre = "internal"
         post = ""
+    [[menu.links]]
+        url = "/articles/"
+        name = "技术文章"
+        weight = 2
+        pre = "internal"
+        post = ""
     [[menu.main]]
         url = "/articles/"
         name = "技术文章"
-        weight = 1
+        weight = 2
         pre = "internal"
         post = ""
-    #[[menu.main]]
-    #    url = "/categories/"
-    #    name = "Categories"
-    #    weight = 3
-    #    pre = "internal"
-    #    post = "th"
-    #[[menu.main]]
-    #    url = "/tags/"
-    #    name = "Tags"
-    #    weight = 4
-    #    pre = "internal"
-    #    post = "tags"
-    #[[menu.main]]
-    #    url = "/about/"
-    #   name = "About"
-    #   weight = 5
-    #   pre = "internal"
-    #   post = "user-circle"
-    [[menu.main]]
-        weight = 2
-        identifier = "theme-switcher"
+        identifier = "articles"
     [[menu.main]]
         weight = 3
-        identifier = "lang-switcher"
+        identifier = "theme-switcher"
     [[menu.main]]
         weight = 4
-        identifier = "search"
-        post = "search"
+        identifier = "lang-switcher"
 
 
 
@@ -290,7 +278,7 @@ uglyURLs = false
     ######################################
     # Menu Bar
 
-    enableMenu = true
+    enableMenu = false
     # Note: invalid for header layout flex
 
     displayMenuInHome = true
@@ -314,11 +302,11 @@ uglyURLs = false
     # 3. posts     List of post’s summary
     # 4. page      Normal page/post
 
-    homeLayout = "posts"
+    homeLayout = "poetry"
 
     ## Poetry
     # Verse (Markdown supported)
-    homePoetry = []
+    homePoetry = ["以前一直喜欢用笔记录生活和工作，也一直很喜欢那种状态，但是后来发现很多笔记太过随意，写的时候很爽，找起来着实费功夫，然后慢慢开始在github的issues上零零碎碎的记录一下工作中遇到的问题，慢慢也习惯这种方式。这个博客主要还是把以前的内容挪过来，自己也重新梳理一遍，看看哪些是可以再次被记录，哪些可以再完善一下的。"]
     # Padding of links at the bottom
     # Unit: em
     homeLinksPadding = 1
@@ -380,7 +368,7 @@ uglyURLs = false
     # tree organization structure of your
     # posts.
 
-    categoryBy = "categories"
+    categoryBy = "sections"
     # ATTENTION: If you set it to `sections`,
     #            be sure to delete `categories`
     #            in `taxonomies` at the top
@@ -482,7 +470,7 @@ uglyURLs = false
     #       name of the folder under the
     #       site’s `content` directory.
 
-    # mainSections = ["posts"]
+    mainSections = ["articles"]
 
 
     ######################################
@@ -781,12 +769,12 @@ uglyURLs = false
     ######################################
     # Post Meta Info
 
-    enablePostMeta = true
+    enablePostMeta = false
     # Note: *global settings*
     #       `meta` in post’s Front Matter
     #       has a higher priority than here
 
-    enablePostMetaInHome = true
+    enablePostMetaInHome = false
     # Note: valid for the `posts` and
     #       `page` homepage layout only
 
@@ -1255,7 +1243,7 @@ uglyURLs = false
     iconAnimation = true
 
     # Display links to Hugo and MemE?
-    displayPoweredBy = true
+    displayPoweredBy = false
 
     displaySiteCopyright = true
 
