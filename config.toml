@@ -195,16 +195,10 @@ uglyURLs = false
 
 [menu]
     ## Menu bar
-    [[menu.links]]
+    [[menu.main]]
         url = "/"
         name = "主页"
         weight = 1
-        pre = "internal"
-        post = ""
-    [[menu.links]]
-        url = "/articles/"
-        name = "技术文章"
-        weight = 2
         pre = "internal"
         post = ""
     [[menu.main]]
