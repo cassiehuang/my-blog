@@ -1,7 +1,7 @@
 ---
 title: "安装和配置nginx服务器"
 date: 2021-07-02T10:06:56+08:00
-draft: true
+draft: false
 ---
 
 #### 配置vue history模式支持
