@@ -23,113 +23,46 @@
         
             <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
         
-        <lastBuildDate>Tue, 13 Jul 2021 11:02:25 &#43;0800</lastBuildDate>
+        <lastBuildDate>Wed, 18 Aug 2021 10:15:05 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://cassiehuang.github.io/rss.xml" />
         
         
             <item>
-                <title>安装和配置nginx服务器</title>
-                <link>https://cassiehuang.github.io/articles/nginx/</link>
-                <guid isPermaLink="true">https://cassiehuang.github.io/articles/nginx/</guid>
-                <pubDate>Fri, 02 Jul 2021 10:06:56 &#43;0800</pubDate>
+                <title>Cas单点登录</title>
+                <link>https://cassiehuang.github.io/articles/cas/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/cas/</guid>
+                <pubDate>Tue, 13 Jul 2021 13:52:57 &#43;0800</pubDate>
                 
                     <author>2694915367@qq.com (黄敏)</author>
                 
                 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
                 
-                    <description>&lt;h4 id=&#34;配置vue-history模式支持&#34;&gt;配置vue history模式支持&lt;/h4&gt;
-&lt;p&gt;server {
-try_files $uri $uri/ /erp-farm-admin/index.html;
-}&lt;/p&gt;
-&lt;h4 id=&#34;配置反向代理&#34;&gt;配置反向代理&lt;/h4&gt;
-&lt;p&gt;loaction ^~ /api/ {
-proxy_pass http://127.0.0.1:8081/
-}&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;worker_processes 1;
-events {worker_connections 1024;}
-http {include mime.types;default_type application/octet-stream;
-sendfile on;
-keepalive_timeout 65;
-server {
-listen 80;server_name localhost;
-#gzip服务开启，对大于100k的文件进行gzip压缩，提高前端资源的响应速度
-gzip on;
-gzip_static on;
-gzip_min_length 100;
-gzip_comp_level 6;
-gzip_types application/javascript text/css text/xml;
-gzip_disable &amp;quot;MSIE [1-6]\.&amp;quot;;
-gzip_vary on;
-gzip_buffers 32 4K;
-#上传文件大小限制
-client_max_body_size 100M;
-#charset koi8-r;
-#access_log logs/host.access.log main;
-location / {
-#静态资源的根路径
-root /usr/share/nginx/html/cbkc-web/;index index.html index.htm;
-#支持vue history路由模式
-try_files $uri $uri/ /index.html;
-#html文件不缓存，可以解决每次上线后，由于浏览器缓存造成的错误
-if ($request_filename ~* .*\.(?:htm|html)$) {
-add_header Cache-Control &amp;quot;private, no-store, no-cache, must-revalidate, proxy-revalidate&amp;quot;;
-}
-#js和css文件设置过期时间
-if ($request_filename ~* .*\.(?:js|css)$) {expires 7d;}
-#图片、视频等文件设置过期时间
-if ($request_filename ~* .*\.(?:jpg|ipeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm)$) {expires 7d;}}
-location /manager/ {alias /usr/share/nginx/html/cbkc-web-admin/;index index.html index.htm;}
-#反向代理，解决跨域问题
-location ^~ /api/ {
-#后台开启了请求来源检测
-proxy_set_header host $host;
-proxy_pass http://112.7.35.26:8082/;
-}
-&lt;/code&gt;&lt;/pre&gt;</description>
-                
-                
-                
-                    
-                    
-                    
-                        
-                        
-                        
-                            
-                                <category domain="https://cassiehuang.github.io/articles/">articles</category>
-                            
-                        
-                    
-                
-                
-                
-            </item>
-        
-            <item>
-                <title>前端模块化设计</title>
-                <link>https://cassiehuang.github.io/articles/frontend2/</link>
-                <guid isPermaLink="true">https://cassiehuang.github.io/articles/frontend2/</guid>
-                <pubDate>Fri, 02 Jul 2021 10:03:48 &#43;0800</pubDate>
-                
-                    <author>2694915367@qq.com (黄敏)</author>
-                
-                <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
-                
-                    <description>&lt;p&gt;前端模块化设计不仅是组件的设计，更是整个前端项目的模块化，在项目开发中，需要从以下几个方面考虑。&lt;/p&gt;
+                    <description>&lt;p&gt;&lt;a href=&#34;https://www.cnblogs.com/Eleven-Liu/p/10336181.html&#34;&gt;https://www.cnblogs.com/Eleven-Liu/p/10336181.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;cas&#34;&gt;CAS&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;图片资源管理，包括字体图标、雪碧图、图片转base64、图片单独引入等。&lt;/li&gt;
-&lt;li&gt;css资源管理，例如将公用的css写到commom.css里面，根据项目UI设计标准编写可复用的基础样式等。&lt;/li&gt;
-&lt;li&gt;api进行封装，统一处理请求头、处理请求响应、进行错误处理，同时将所有接口按业务逻辑分为多个文件，分模块管理。&lt;/li&gt;
-&lt;li&gt;utils文件夹存放公用函数。&lt;/li&gt;
-&lt;li&gt;项目中涉及的常量、各种key、value的映射关系，统一在constant文件夹下进行管理。&lt;/li&gt;
-&lt;li&gt;封装组件，将具有相似功能，相似设计的模块封装为组件。&lt;/li&gt;
-&lt;li&gt;封装filter，例如将接口传递的时间在组件渲染为UI要求的格式。&lt;/li&gt;
-&lt;li&gt;封装mixin，例如每个用到Page组件的页面都包括翻页相关的data、method，就可以封装一个mixin。&lt;/li&gt;
-&lt;li&gt;合理的划分界面模块，每个模块大小不应该超过500行代码。&lt;/li&gt;
-&lt;li&gt;routes统一在router文件夹下进行配置管理。&lt;/li&gt;
-&lt;li&gt;vuex中的modules支持模块化设计。&lt;/li&gt;
-&lt;li&gt;配置与应用分离，应用相关的对外的配置，存放在config文件夹下。&lt;/li&gt;
+&lt;li&gt;CAS是企业级的单点登陆解决方案&lt;/li&gt;
+&lt;li&gt;大概流程是
+（1）浏览器向www发起请求，无ST
+（2）www返回一个重定向到cas的请求，带上返回地址
+（3）浏览器向cas发起请求
+（4）cas检查TGC，第一次访问，不带TGC，则返回登陆页面
+（5）浏览器填写好登陆信息后发送给cas
+（6）cas验证登陆信息，在cookie中写入TGC，下次浏览器访问cas会带上这个TGC，写入重定向，并将ST写入www地址链接
+（7）浏览器重定向到www网站，携带ST
+（8）www根据ST去cas验证登陆是否有效
+（9）cas根据ST验证，通过后，告诉www该ST有效，www在session中记录登录状态
+（10）www返回浏览器资源
+（11）浏览器第二次访问www
+（12）www从session中知道已经登陆，直接返回资源
+（13）浏览器访问mail
+（14）mail返回一个重定向请求，重定向到cas
+（15）浏览器访问cas，会带上TGC
+（16）cas验证TGC，返回ST（token），并让浏览器重定向到mail
+（17）重定向到mail
+（18）mail根据ST去cas验证是否有效
+（19）cas验证有效后，返回mail，mail通过后在session中设置登录状态
+（20）返回浏览器资源&lt;/li&gt;
 &lt;/ol&gt;
 </description>
                 
@@ -152,33 +85,319 @@ proxy_pass http://112.7.35.26:8082/;
             </item>
         
             <item>
-                <title>前端安全</title>
-                <link>https://cassiehuang.github.io/articles/frontend1/</link>
-                <guid isPermaLink="true">https://cassiehuang.github.io/articles/frontend1/</guid>
-                <pubDate>Fri, 02 Jul 2021 10:01:26 &#43;0800</pubDate>
+                <title>egg实战-教学服务</title>
+                <link>https://cassiehuang.github.io/articles/egg%E5%AE%9E%E6%88%98-%E6%95%99%E5%AD%A6%E6%9C%8D%E5%8A%A1/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/egg%E5%AE%9E%E6%88%98-%E6%95%99%E5%AD%A6%E6%9C%8D%E5%8A%A1/</guid>
+                <pubDate>Tue, 13 Jul 2021 13:52:57 &#43;0800</pubDate>
                 
                     <author>2694915367@qq.com (黄敏)</author>
                 
                 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
                 
-                    <description>&lt;ol&gt;
-&lt;li&gt;前端源码安全
-精简和压缩，也可以达到混淆的效果，有效降低代码可读性
-（1）编译完的代码删除代码注释，避免注释暴露部分业务内容或代码结构
-（2）删除无意义或者多余的空白，删除缩进，缩短变量名等
-（3）实现方式：uglify、compressor
-2、不可调试，webpack的sourceMap设置为false
-3、专门的加密进行混淆，不常用&lt;/li&gt;
-&lt;li&gt;文件上传
-限制文件上传的后缀和文件类型&lt;/li&gt;
-&lt;li&gt;XSS攻击
-对于前端输入的文本进行encode
-对于富文本设置白名单，对不在白名单的内容进行过滤，例如&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;等
-对于innerHTML的使用保持敏感，确保输出内容可信任
-对于敏感的cookie，仅允服务器通过set-cookie设置，不允许浏览器写入（使用HttpOnly）&lt;/li&gt;
-&lt;li&gt;CSRF攻击
-1、设置X-Frame-Options，防止iframe内嵌劫持&lt;/li&gt;
+                    <description>&lt;h3 id=&#34;文件结构&#34;&gt;文件结构&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;---config
+-----plugin.js  引入插件
+-----config.default.js  默认配置文件，所有环境都会加载这个文件，一般作为开发环境的默认配置文件配置
+-----config.prod.js  生产环境配置（prod 是env，指）
+---app
+-----router api和controller的映射
+-----controller 解析用户输入，处理后返回相应结构，利用service和数据库交互
+-----service 进行复杂业务逻辑处理
+-----model  数据库表映射
+-----middleware  中间件，注册在配置文件config,或者在框架和插件中使用
+-----router.js  （必须）框架统一以此作为所有路由入口
+---run egg框架启动时会把合并后的最终配置dump到agent_config中
+-----agent_config_meta.json
+-----agent_config.json   
+---package.json 依赖和script命令
+---app.js 统一的入口文件，进行启动过程自定义，可以利用框架提供的生命周期函数
+---pkg-build.js 是执行build-win和build-linux时会执行，配置在package.json内的bin字段下
+---preload.js 执行start命令时的配置文件，主要是负责读取配置环境env
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;插件&#34;&gt;插件&lt;/h3&gt;
+&lt;p&gt;egg-view-nunjucks 渲染html的模版插件&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;写入plugin&lt;/li&gt;
+&lt;li&gt;config.default.js 中配置&lt;/li&gt;
 &lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;nx&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;view&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;mapping&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+     &lt;span class=&#34;s1&#34;&gt;&amp;#39;.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;nunjucks&amp;#39;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;egg-jwt  生成token的插件
+egg管理token的插件，可以通过config里的match来匹配需要验证的token的路由
+egg-sequelize  辅助我们将定义好的model对象加载到app和cxt上&lt;/p&gt;
+&lt;h3 id=&#34;middleware-中间件写法&#34;&gt;middleware 中间件写法&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;nx&#34;&gt;module&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;exports&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;auth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;cxt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Access-Control-Allow-Credentials&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;true&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;token&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;token&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;awiat&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;service&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;auth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;vertify&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;token&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;kr&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;99&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;您的请求不合法&amp;#39;&lt;/span&gt;
+            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;module&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;exports&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;startTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;next&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;endTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Date&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;reportTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;endTime&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;startTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// 在app.js中加入
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;module&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;exports&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;coreMiddleware&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;unshif&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;report&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;router&#34;&gt;router&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;nx&#34;&gt;module&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;controller&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;redirect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;/public/index.html&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;302&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;router&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/user/:id&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;info&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;controller&#34;&gt;controller&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;controller&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;egg&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;UserController&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Controller&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;login&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;user_rules&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;loginRule&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+        &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;account&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;email&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;customerCode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;yzm&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;request&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;message&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;操作成功&amp;#39;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;kd&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;login_code&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;session&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;login_code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;yzm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!==&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;login_code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;message&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;验证码错误&amp;#39;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;login_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;cookies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;login_code&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;login_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;yzm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!==&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;login_code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;message&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;验证码错误‘
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;                ctx.body = body;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;                return;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;            } else if (!login_code) {
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;                body.result = 1;
+&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;                body.message = &amp;#39;&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;您的浏览器禁用了cookie&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;cxt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;service&#34;&gt;service&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Service&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;egg&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Service&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;UserService&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Service&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;field&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;w&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;$or&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[{&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fields&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;uid&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;nx&#34;&gt;email&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fields&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;email&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;}]&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;model&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;findOrcreat&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;w&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;defaults&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fields&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;model&#34;&gt;model&lt;/h3&gt;
+&lt;h3 id=&#34;schedule-定时任务&#34;&gt;schedule 定时任务&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Subscription&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;require&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;egg&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Subscription&lt;/span&gt;
+
+&lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;UpdateCache&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Subscription&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;kr&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;get&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schedule&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;interval&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;1m&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;all&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+  &lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;subscribe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;res&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;cxt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;curl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;http://www.api.com/cache&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;dataType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;json&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ctx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;cache&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;res&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;module&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;exports&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;UpdateCache&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;注意事项&#34;&gt;注意事项&lt;/h3&gt;
+&lt;p&gt;1.开发环境没有注册auth的中间件，生产环境注册了ac
+2.MVC整个结构通过router.j串联起来，router.js文件位置固定app/router.js
+3.应用层中间件：app.config.appMiddleware 框架默认层中间件:app.config.coreMiddleware
+4.所有controller必须放在app/controller目录下，可多级目录
+5.ctx.body 实际上是ctx.response.body的简写&lt;/p&gt;
 </description>
                 
                 
@@ -200,67 +419,115 @@ proxy_pass http://112.7.35.26:8082/;
             </item>
         
             <item>
-                <title>产品建设前期用户体验相关工作总结</title>
-                <link>https://cassiehuang.github.io/articles/userexperience/</link>
-                <guid isPermaLink="true">https://cassiehuang.github.io/articles/userexperience/</guid>
-                <pubDate>Fri, 02 Jul 2021 09:59:40 &#43;0800</pubDate>
+                <title>Single Spa</title>
+                <link>https://cassiehuang.github.io/articles/single-spa/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/single-spa/</guid>
+                <pubDate>Tue, 13 Jul 2021 11:30:47 &#43;0800</pubDate>
                 
                     <author>2694915367@qq.com (黄敏)</author>
                 
                 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
                 
-                    <description>&lt;p&gt;产品建设前期用户体验相关工作总结
-（一）产品分析阶段
-产品分析阶段需要确定产品的背景、产品的定位、产品的主次，发现本产品与其他产品的差异性，确定技术可实现性，发现风险点：
-1、分析用户需求，用户表达的需求不一定真的是用户的痛点，需要结合自己对产品、对行业的认知，分析用户需求产生的深层次原因；
-2、分析同类产品的设计和重点，确定我们的产品和其他产品的共同点和不同点；
-3、分析产品亮点，这既是产品营销方向，也是后续产品功能的基石；
-4、明确系统的使用者，“谁才是真正的用户”决定了产品的方向，需要尽快确定下来；
-5、确定团队是否具备技术实现能力；
-6、确定支持的展示端（PC、手机端H5，小程序、APP等）
-（二）原型分析阶段
-根据前期产品的调研和规划，进行原型分析，需重点关注以下几点：
-1、产品各页面功能的划分；
-2、主体区域和侧边栏区域的设计；
-3、导航栏的设计；
-4、根据产品定位，确定各模块所占区域大小和位置，确定主次关系；
-5、分析用户行为，确定用户每个需求需要跳转多少次页面、点击多少按钮，思考哪些能够减少层级结构，哪些可以建立快捷操作；
-6、分清功能的主次，来确定各入口的位置，页面的层级等；
-7、关键操作、用户常用场景需要设计的简单便捷（登录、搜索、缴费等）；
-8、明确系统里存在的角色，各角色上需要做哪些差异处理，最好的设计是与本用户无关的信息不做展示；
-9、根据功能相关性，确定功能应该在哪些页面出现，尽量不要出现相关功能在不同的页面或者各种功能都糅杂在一个页面的情况；
-10、用户当前需要关注的内容，建议设计在页面显眼位置，并增加快捷操作（比如老年大学中用户当前正在进行的课程，待缴费的课程等在首页可查看）；
-11、分析用户行为，设计和展示内容要符合用户预期，不能违背常理；
-（三）UI设计阶段
-根据原型和产品分析，确定UI设计，需要关注以下几点：
-1、UI设计规范，需要制定包括windows字体、mac字体、字号、间隔设计、主色调、色彩组合、按钮、单选框、多选框、翻页等组件的规范；
-2、根据产品定位确定是否需要提供响应式设计，需要支持的屏幕尺寸范围等；
-3、考虑loading状态的设计；
-4、考虑各类空数据的展示效果；
-5、考虑各类异常状态的设计；
-6、考虑设计可扩展性，包括文本长短、分类多少、数据多少、选择项多少等对页面的影响；
-7、提示信息需要精准、简洁；
-8、设计点击事件、hover事件、滚动事件等，能让用户用最方便的方式看到最关键的信息；
-9、可操作区域一定要符合使用习惯，不能出现可以滚动区域用户不知道可以滚动，可以操作的而区域，用户不知道可以操作的设计；
-（四）前端实现阶段
-前端开发在高保真还原设计图的基础上，需要考虑一些非功能设计，包括：
-1、用户访问地址是否合理，是否会暴露关键信息；
-2、用户非预期操作下的页面效果；
-3、用户刷新、回退的情况下的状态记录；
-4、用户必输项校验和规定，一些特定的要求必须要有提示；
-5、用户错误输入或错误操作需要有提示；
-6、用户操作反馈要注意及时和准确
-7、关键操作需要考虑增加用户确认操作；
-8、确定各输入框的长短、字符类型限制；
-9、考虑对用户输入做暂存处理，特别是输入较多的情况，考虑本地存储用户输入（比如wiki的文章编辑）；
-10、vue导航模式选择hash还是history模式（http://edu.test.com/home或 &lt;a href=&#34;http://edu.test.com/#home&#34;&gt;http://edu.test.com/#home&lt;/a&gt;）；
-11、翻页操作进入下一级页面后回退或者返回操作，是否能回退到跳转前的页面；
-12、回退或返回上一级页面，是否需要支持记录上一级页面的滚动位置、上一级页面的状态；
-13、在需要用户等待的地方通过loading或者提示等让用户知道等待是合理的，不是系统问题；
-14、用户可点击区域需要修改鼠标状态；
-15、增加对css3动画的应用，增加切换动画，能够使整个系统更流畅，用户使用感也会更好；
-16、首屏时间的控制，尽量控制在3s内，越短越好，有较长需要等待的地方做提示；&lt;/p&gt;
-</description>
+                    <description>&lt;h3 id=&#34;systemjs&#34;&gt;systemjs&lt;/h3&gt;
+&lt;p&gt;运行于浏览器端的模块加载器，将我们整个应用的所需要的js文件，都以imports的形式引入进来
+使用方法一：
+System.import(&#39;./test.js&#39;);
+使用方法二：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;写一个配置文件，给每个资源定义一个key
+{
+&amp;ldquo;imports&amp;rdquo;: {
+&amp;ldquo;vue&amp;rdquo;: &amp;lsquo;./public/vue.js&amp;rsquo;,
+&amp;ldquo;single-spa&amp;rdquo;: &amp;lsquo;./public/single-spa.js&amp;rsquo;
+}
+}&lt;/li&gt;
+&lt;li&gt;引入配置文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type=&#34;systemjs-importmap&#34; src=&#34;&#34;&gt;&lt;/script&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;引入文件
+System.import(key)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;single-spa实践&#34;&gt;single-spa实践&lt;/h2&gt;
+&lt;h3 id=&#34;结构目录设计&#34;&gt;结构目录设计&lt;/h3&gt;
+&lt;p&gt;&amp;mdash;common
+&amp;mdash;projects
+&amp;mdash;root_html_file
+&amp;mdash;&amp;ndash;index.html 引入index.js,  systemjs，single-spa,
+&amp;mdash;&amp;ndash;index.js
+&amp;mdash;&amp;ndash;registry
+&amp;mdash;&amp;mdash;&amp;ndash;public_dependents.json
+&amp;mdash;&amp;mdash;&amp;ndash;singleSpa_project.json&lt;/p&gt;
+&lt;h3 id=&#34;indexjs&#34;&gt;index.js&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;System_imports&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./single-spa.js&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;./frame.js&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+  &lt;span class=&#34;nb&#34;&gt;Promise&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;all&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;System_imports&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;then&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;modules&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;SingleSpa&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;modules&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Frame&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;modules&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+
+    &lt;span class=&#34;nx&#34;&gt;SingleSpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;registerApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+      &lt;span class=&#34;s1&#34;&gt;&amp;#39;frame&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;Frame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;SingleSpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+
+    &lt;span class=&#34;nb&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;addEventListener&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;INIT_FRAME&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;arr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;keys&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;SINGLE_SPA_PROJECTS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;arr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;forEach&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;project&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;project&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!==&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;frame&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+          &lt;span class=&#34;nx&#34;&gt;SingleSpa&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;registerApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;project&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;System&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;SINGLE_SPA_PROJECTS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;project&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]),&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;pathname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;indexOf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;project&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;===&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+      &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;})()&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
                 
                 
                 
@@ -284,7 +551,7 @@ proxy_pass http://112.7.35.26:8082/;
                 <title>前端开发规范梳理</title>
                 <link>https://cassiehuang.github.io/articles/frontend/</link>
                 <guid isPermaLink="true">https://cassiehuang.github.io/articles/frontend/</guid>
-                <pubDate>Fri, 02 Jul 2021 09:58:04 &#43;0800</pubDate>
+                <pubDate>Wed, 07 Jul 2021 09:58:04 &#43;0800</pubDate>
                 
                     <author>2694915367@qq.com (黄敏)</author>
                 
@@ -349,128 +616,160 @@ js规范
             </item>
         
             <item>
-                <title>前端压缩之JSZip</title>
-                <link>https://cassiehuang.github.io/articles/jszip/</link>
-                <guid isPermaLink="true">https://cassiehuang.github.io/articles/jszip/</guid>
-                <pubDate>Fri, 02 Jul 2021 09:34:27 &#43;0800</pubDate>
+                <title>微服务</title>
+                <link>https://cassiehuang.github.io/articles/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
+                <pubDate>Tue, 06 Jul 2021 10:01:26 &#43;0800</pubDate>
                 
                     <author>2694915367@qq.com (黄敏)</author>
                 
                 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
                 
-                    <description>&lt;p&gt;这篇文章起源于一个工作中遇到的需求，虽然后面因为下载文件的总体积过大而没有选择这个方案，但是这个内容还是非常值得分享一下的。值得一提的是，JSZip的原理是将文件都下载到内存中，然后调用JSZip统一打包，然后触发保存，所以总的文件越大，性能越差，经过测试，1G以下的文件对性能影响较小，几个G的也能够处理，只是比较缓慢。所以，选用这个方案，建议总文件大小小于1G。
-对于此需求，设计了如下demo：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
-&amp;lt;head&amp;gt;
-  &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
-  &amp;lt;meta http-equiv=&amp;quot;X-UA-Compatible&amp;quot; content=&amp;quot;IE=edge&amp;quot;&amp;gt;
-  &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt;
-  &amp;lt;script src=&amp;quot;./js/jszip.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-  &amp;lt;script src=&amp;quot;./js/FileSaver.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-  &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-  &amp;lt;button id=&amp;quot;download&amp;quot;&amp;gt;下载并压缩&amp;lt;/button&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;script&amp;gt;
-  window.onload = function() {
-    const fileAjax = (url, callback) =&amp;gt; {
-      console.log(url)
-      const xhr = new XMLHttpRequest()
-      xhr.open(&#39;get&#39;, url, true)
-      xhr.responseType = &#39;blob&#39;
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 &amp;amp;&amp;amp; xhr.status === 200) {
-          callback(xhr.response)
-        }
-      }
-      xhr.send()
-    }
-    
-    const download = (urls) =&amp;gt; {
-      const zip = new JSZip()
-      const folder = zip.folder(&#39;personInfomation&#39;)
-      let curIndex = 0
-
-      const downCallback = () =&amp;gt; {
-        fileAjax(urls[curIndex].url, (blob) =&amp;gt; {
-          folder.file(urls[curIndex].filename, blob)
-          curIndex +=1
-          if (curIndex &amp;lt; urls.length - 1) {
-            downCallback()
-          } else {
-            zip.generateAsync({ type: &#39;blob&#39;})
-              .then((content) =&amp;gt; {
-                saveAs(content, &#39;test.zip&#39;)
-              })
-          }
-        })
-      }
-      downCallback()
-    }
-    const urls = [
-      {
-        filename: &#39;test1.png&#39;,
-        url: &#39;https://www.test.com/1.png&#39;
-      },
-      {
-        filename: &#39;test2.png&#39;,
-        url: &#39;https://www.test.com/2.png&#39;
-      }
-    ]
-
-    const btn = document.querySelector(&#39;#download&#39;)
-    btn.addEventListener(&#39;click&#39;, () =&amp;gt; {
-      download(urls)
-    })
-  }
-&amp;lt;/script&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实现的主要逻辑是，获取到文件名和下载地址后，循环的发起http请求，当一个请求完成后，将文件存放在zip文件内（此时zip还在内存区），然后再调起下一个http请求，知道文件全部下载完成。最后将内存区的zip文件保存到本地。
-当然，要让这个方案更加完善，还可以使用promise和axios模拟多线程并发请求，同时考虑文件下载失败后重新发起请求等多种场景，这里为了讲目光集中在JSZip，就不再扩展开讲了。
-JSZip的使用范围不止于此，它还可以运行在node环境，可以通过fileReader读取本地文件，然后进行压缩。因此，如果前端项目需要将文件打包为zip压缩包，可以在编译命令“npm run build”里面加上压缩的操作，不再使用手动压缩的方式。实现方式如下：
-读取文件夹下的文件
-如果是文件夹就用jszip创建文件夹，然后递归的执行readDir方法
-如果是文件就读取文件，jszip创建文件
-将内存区的jszip文件压缩
-删除旧的zip包，将新的压缩包写入指定路径&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;const JSZip = require(&#39;jszip&#39;)
-const fs = require(&#39;fs&#39;)
-const path = require(&#39;path&#39;)
-
-const readDir = (filePath, directory) =&amp;gt; {
-  const files = fs.readdirSync(filePath)
-  files.forEach((fileName) =&amp;gt; {
-    const fileDir = path.join(filePath, fileName)
-    const stats = fs.statSync(fileDir)
-    if (stats.isFile()) {
-      const content = fs.readFileSync(fileDir, &#39;utf8&#39;)
-      directory.file(fileName, content)
-    } else if (stats.isDirectory()) {
-      const directory = jszip.folder(fileName)
-      readDir(fileDir, directory)
-    }
-  })
-}
-const jszip = new JSZip()
-const filePath = path.resolve(&#39;./cbkc-web&#39;)
-readDir(filePath, jszip)
-
-jszip
-  .generateAsync({
-    type: &#39;nodeBuffer&#39;,
-    compression: &#39;DEFLATE&#39;,
-    compressionOptions: {
-      level: 9,
-    },
-  })
-  .then((content) =&amp;gt; {
-    fs.unlinkSync(&#39;./cbkc-web.zip&#39;)
-    fs.writeFileSync(&#39;./cbkc-web.zip&#39;, content)
-  })
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;另一方面，JSZip还可以解压缩zip文件。在游戏开发中，尤其是小游戏平台，比如之前比较火热的h5小游戏，平台能够提供给游戏的包体积非常有限，这样的情况下，小游戏开发者不得不把资源压缩后存放在客户端，然后通过启动时读取文件后解压缩，这个时候就可以用到JSZip了。&lt;/p&gt;
+                    <description>&lt;h3 id=&#34;前端微服务出现的趋势&#34;&gt;前端微服务出现的趋势&lt;/h3&gt;
+&lt;p&gt;而在前端微服务化上，人们更想要的结果是聚合，尤其是那些 To B（to Bussiness）的应用。&lt;/p&gt;
+&lt;p&gt;在这两三年里，移动应用出现了一种趋势，用户不想装那么多应用了。而往往一家大的商业公司，会提供一系列的应用。这些应用也从某种程度上，反应了这家公司的组织架构。然而，在用户的眼里他们就是一家公司，他们就只应该有一个产品。相似的，这种趋势也在桌面 Web 出现。聚合成为了一个技术趋势，体现在前端的聚合就是微服务化架构&lt;/p&gt;
+&lt;h3 id=&#34;路由分发式微前端&#34;&gt;路由分发式微前端&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;主要是通过路由将不同业务分发到不同的、独立的前端应用上&lt;/li&gt;
+&lt;li&gt;最易采用的‘微前端’方案&lt;/li&gt;
+&lt;li&gt;例如，基于nginx，通过路由，分发的到不同的服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;listen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;80&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;server_name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;www&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;phodal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;com&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;api&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;proxy_pass&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//172.31.23.13:8080/api
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;web&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;admin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;proxy_pass&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//172.31.23.25/web/admin
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;location&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;web&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;notify&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;proxy_pass&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//172.31.23.22/web/notify
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;iframe创建容器&#34;&gt;iframe创建容器&lt;/h3&gt;
+&lt;p&gt;1.html内联框架元素&lt;iframe&gt;表示嵌套的正在浏览的上下午呢，能有效的将另一个html页面嵌入当前页面
+2. 采用iframe需要两点要求：无seo支持，拥有相应的应用管理机制&lt;/p&gt;
+&lt;h3 id=&#34;自制框架兼容应用&#34;&gt;自制框架兼容应用&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;在页面合适的地方引入或创建DOM&lt;/li&gt;
+&lt;li&gt;用户操作时，加载对应的应用，并能卸载应用
+（Single-SPA 已经拥有了大部分框架的启动和卸载处理）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;组合式集成将应用微件化&#34;&gt;组合式集成：将应用微件化&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;组合式集成，即通过软件工程的方式在构建前、构建时、构建后等步骤中，对应用进行进一步拆分，并重新组合
+（独立仓储，独立开发，构建时整体打包，合并应用）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;纯web-components技术构建&#34;&gt;纯Web Components技术构建&lt;/h3&gt;
+&lt;h3 id=&#34;结合web-components构建&#34;&gt;结合Web Components构建&lt;/h3&gt;
+&lt;h3 id=&#34;微服务的难点&#34;&gt;微服务的难点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;微服务的难点是需要考虑多个模块之间如何调用的问题，以及鉴权、日志、甚至加入网关层&lt;/li&gt;
+&lt;li&gt;微前端应用在运行时是一个整体，需要聚合，甚至还需要交互、通信&lt;/li&gt;
+&lt;/ol&gt;
 </description>
+                
+                
+                
+                    
+                    
+                    
+                        
+                        
+                        
+                            
+                                <category domain="https://cassiehuang.github.io/articles/">articles</category>
+                            
+                        
+                    
+                
+                
+                
+            </item>
+        
+            <item>
+                <title>安装和配置nginx服务器</title>
+                <link>https://cassiehuang.github.io/articles/nginx/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/nginx/</guid>
+                <pubDate>Fri, 02 Jul 2021 10:06:56 &#43;0800</pubDate>
+                
+                    <author>2694915367@qq.com (黄敏)</author>
+                
+                <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
+                
+                    <description>&lt;h4 id=&#34;配置vue-history模式支持&#34;&gt;配置vue history模式支持&lt;/h4&gt;
+&lt;p&gt;server {
+try_files $uri $uri/ /erp-farm-admin/index.html;
+}&lt;/p&gt;
+&lt;h4 id=&#34;配置反向代理&#34;&gt;配置反向代理&lt;/h4&gt;
+&lt;p&gt;loaction ^~ /api/ {
+proxy_pass http://127.0.0.1:8081/
+}&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;worker_processes 1;
+events {worker_connections 1024;}
+http {include mime.types;default_type application/octet-stream;
+sendfile on;
+keepalive_timeout 65;
+server {
+listen 80;server_name localhost;
+#gzip服务开启，对大于100k的文件进行gzip压缩，提高前端资源的响应速度
+gzip on;
+gzip_static on;
+gzip_min_length 100;
+gzip_comp_level 6;
+gzip_types application/javascript text/css text/xml;
+gzip_disable &amp;quot;MSIE [1-6]\.&amp;quot;;
+gzip_vary on;
+gzip_buffers 32 4K;
+#上传文件大小限制
+client_max_body_size 100M;
+#charset koi8-r;
+#access_log logs/host.access.log main;
+location / {
+#静态资源的根路径
+root /usr/share/nginx/html/cbkc-web/;index index.html index.htm;
+#支持vue history路由模式
+try_files $uri $uri/ /index.html;
+#html文件不缓存，可以解决每次上线后，由于浏览器缓存造成的错误
+if ($request_filename ~* .*\.(?:htm|html)$) {
+add_header Cache-Control &amp;quot;private, no-store, no-cache, must-revalidate, proxy-revalidate&amp;quot;;
+}
+#js和css文件设置过期时间
+if ($request_filename ~* .*\.(?:js|css)$) {expires 7d;}
+#图片、视频等文件设置过期时间
+if ($request_filename ~* .*\.(?:jpg|ipeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm)$) {expires 7d;}}
+location /manager/ {alias /usr/share/nginx/html/cbkc-web-admin/;index index.html index.htm;}
+#反向代理，解决跨域问题
+location ^~ /api/ {
+#后台开启了请求来源检测
+proxy_set_header host $host;
+proxy_pass http://112.7.35.26:8082/;
+}
+&lt;/code&gt;&lt;/pre&gt;</description>
                 
                 
                 
@@ -759,6 +1058,322 @@ Given(/^点击Display Message按钮下方动态显示一条数据$/, async fu
   assert.equal(displays.length, 1);
 });
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;（3）执行结果，分别为用例执行正确和用例执行错误的情况。（更详细的内容，更方便的操作，可以使用cukeTest配合）&lt;/p&gt;
+</description>
+                
+                
+                
+                    
+                    
+                    
+                        
+                        
+                        
+                            
+                                <category domain="https://cassiehuang.github.io/articles/">articles</category>
+                            
+                        
+                    
+                
+                
+                
+            </item>
+        
+            <item>
+                <title>前端安全</title>
+                <link>https://cassiehuang.github.io/articles/frontend1/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/frontend1/</guid>
+                <pubDate>Mon, 21 Jun 2021 10:01:26 &#43;0800</pubDate>
+                
+                    <author>2694915367@qq.com (黄敏)</author>
+                
+                <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
+                
+                    <description>&lt;ol&gt;
+&lt;li&gt;前端源码安全
+精简和压缩，也可以达到混淆的效果，有效降低代码可读性
+（1）编译完的代码删除代码注释，避免注释暴露部分业务内容或代码结构
+（2）删除无意义或者多余的空白，删除缩进，缩短变量名等
+（3）实现方式：uglify、compressor
+2、不可调试，webpack的sourceMap设置为false
+3、专门的加密进行混淆，不常用&lt;/li&gt;
+&lt;li&gt;文件上传
+限制文件上传的后缀和文件类型&lt;/li&gt;
+&lt;li&gt;XSS攻击
+对于前端输入的文本进行encode
+对于富文本设置白名单，对不在白名单的内容进行过滤，例如&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;等
+对于innerHTML的使用保持敏感，确保输出内容可信任
+对于敏感的cookie，仅允服务器通过set-cookie设置，不允许浏览器写入（使用HttpOnly）&lt;/li&gt;
+&lt;li&gt;CSRF攻击
+1、设置X-Frame-Options，防止iframe内嵌劫持&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+                
+                
+                
+                    
+                    
+                    
+                        
+                        
+                        
+                            
+                                <category domain="https://cassiehuang.github.io/articles/">articles</category>
+                            
+                        
+                    
+                
+                
+                
+            </item>
+        
+            <item>
+                <title>产品建设前期用户体验相关工作总结</title>
+                <link>https://cassiehuang.github.io/articles/userexperience/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/userexperience/</guid>
+                <pubDate>Tue, 11 May 2021 09:59:40 &#43;0800</pubDate>
+                
+                    <author>2694915367@qq.com (黄敏)</author>
+                
+                <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
+                
+                    <description>&lt;p&gt;产品建设前期用户体验相关工作总结
+（一）产品分析阶段
+产品分析阶段需要确定产品的背景、产品的定位、产品的主次，发现本产品与其他产品的差异性，确定技术可实现性，发现风险点：
+1、分析用户需求，用户表达的需求不一定真的是用户的痛点，需要结合自己对产品、对行业的认知，分析用户需求产生的深层次原因；
+2、分析同类产品的设计和重点，确定我们的产品和其他产品的共同点和不同点；
+3、分析产品亮点，这既是产品营销方向，也是后续产品功能的基石；
+4、明确系统的使用者，“谁才是真正的用户”决定了产品的方向，需要尽快确定下来；
+5、确定团队是否具备技术实现能力；
+6、确定支持的展示端（PC、手机端H5，小程序、APP等）
+（二）原型分析阶段
+根据前期产品的调研和规划，进行原型分析，需重点关注以下几点：
+1、产品各页面功能的划分；
+2、主体区域和侧边栏区域的设计；
+3、导航栏的设计；
+4、根据产品定位，确定各模块所占区域大小和位置，确定主次关系；
+5、分析用户行为，确定用户每个需求需要跳转多少次页面、点击多少按钮，思考哪些能够减少层级结构，哪些可以建立快捷操作；
+6、分清功能的主次，来确定各入口的位置，页面的层级等；
+7、关键操作、用户常用场景需要设计的简单便捷（登录、搜索、缴费等）；
+8、明确系统里存在的角色，各角色上需要做哪些差异处理，最好的设计是与本用户无关的信息不做展示；
+9、根据功能相关性，确定功能应该在哪些页面出现，尽量不要出现相关功能在不同的页面或者各种功能都糅杂在一个页面的情况；
+10、用户当前需要关注的内容，建议设计在页面显眼位置，并增加快捷操作（比如老年大学中用户当前正在进行的课程，待缴费的课程等在首页可查看）；
+11、分析用户行为，设计和展示内容要符合用户预期，不能违背常理；
+（三）UI设计阶段
+根据原型和产品分析，确定UI设计，需要关注以下几点：
+1、UI设计规范，需要制定包括windows字体、mac字体、字号、间隔设计、主色调、色彩组合、按钮、单选框、多选框、翻页等组件的规范；
+2、根据产品定位确定是否需要提供响应式设计，需要支持的屏幕尺寸范围等；
+3、考虑loading状态的设计；
+4、考虑各类空数据的展示效果；
+5、考虑各类异常状态的设计；
+6、考虑设计可扩展性，包括文本长短、分类多少、数据多少、选择项多少等对页面的影响；
+7、提示信息需要精准、简洁；
+8、设计点击事件、hover事件、滚动事件等，能让用户用最方便的方式看到最关键的信息；
+9、可操作区域一定要符合使用习惯，不能出现可以滚动区域用户不知道可以滚动，可以操作的而区域，用户不知道可以操作的设计；
+（四）前端实现阶段
+前端开发在高保真还原设计图的基础上，需要考虑一些非功能设计，包括：
+1、用户访问地址是否合理，是否会暴露关键信息；
+2、用户非预期操作下的页面效果；
+3、用户刷新、回退的情况下的状态记录；
+4、用户必输项校验和规定，一些特定的要求必须要有提示；
+5、用户错误输入或错误操作需要有提示；
+6、用户操作反馈要注意及时和准确
+7、关键操作需要考虑增加用户确认操作；
+8、确定各输入框的长短、字符类型限制；
+9、考虑对用户输入做暂存处理，特别是输入较多的情况，考虑本地存储用户输入（比如wiki的文章编辑）；
+10、vue导航模式选择hash还是history模式（http://edu.test.com/home或 &lt;a href=&#34;http://edu.test.com/#home&#34;&gt;http://edu.test.com/#home&lt;/a&gt;）；
+11、翻页操作进入下一级页面后回退或者返回操作，是否能回退到跳转前的页面；
+12、回退或返回上一级页面，是否需要支持记录上一级页面的滚动位置、上一级页面的状态；
+13、在需要用户等待的地方通过loading或者提示等让用户知道等待是合理的，不是系统问题；
+14、用户可点击区域需要修改鼠标状态；
+15、增加对css3动画的应用，增加切换动画，能够使整个系统更流畅，用户使用感也会更好；
+16、首屏时间的控制，尽量控制在3s内，越短越好，有较长需要等待的地方做提示；&lt;/p&gt;
+</description>
+                
+                
+                
+                    
+                    
+                    
+                        
+                        
+                        
+                            
+                                <category domain="https://cassiehuang.github.io/articles/">articles</category>
+                            
+                        
+                    
+                
+                
+                
+            </item>
+        
+            <item>
+                <title>前端压缩之JSZip</title>
+                <link>https://cassiehuang.github.io/articles/jszip/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/jszip/</guid>
+                <pubDate>Fri, 07 May 2021 09:34:27 &#43;0800</pubDate>
+                
+                    <author>2694915367@qq.com (黄敏)</author>
+                
+                <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
+                
+                    <description>&lt;p&gt;这篇文章起源于一个工作中遇到的需求，虽然后面因为下载文件的总体积过大而没有选择这个方案，但是这个内容还是非常值得分享一下的。值得一提的是，JSZip的原理是将文件都下载到内存中，然后调用JSZip统一打包，然后触发保存，所以总的文件越大，性能越差，经过测试，1G以下的文件对性能影响较小，几个G的也能够处理，只是比较缓慢。所以，选用这个方案，建议总文件大小小于1G。
+对于此需求，设计了如下demo：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+  &amp;lt;meta http-equiv=&amp;quot;X-UA-Compatible&amp;quot; content=&amp;quot;IE=edge&amp;quot;&amp;gt;
+  &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt;
+  &amp;lt;script src=&amp;quot;./js/jszip.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;script src=&amp;quot;./js/FileSaver.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;button id=&amp;quot;download&amp;quot;&amp;gt;下载并压缩&amp;lt;/button&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;script&amp;gt;
+  window.onload = function() {
+    const fileAjax = (url, callback) =&amp;gt; {
+      console.log(url)
+      const xhr = new XMLHttpRequest()
+      xhr.open(&#39;get&#39;, url, true)
+      xhr.responseType = &#39;blob&#39;
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 &amp;amp;&amp;amp; xhr.status === 200) {
+          callback(xhr.response)
+        }
+      }
+      xhr.send()
+    }
+    
+    const download = (urls) =&amp;gt; {
+      const zip = new JSZip()
+      const folder = zip.folder(&#39;personInfomation&#39;)
+      let curIndex = 0
+
+      const downCallback = () =&amp;gt; {
+        fileAjax(urls[curIndex].url, (blob) =&amp;gt; {
+          folder.file(urls[curIndex].filename, blob)
+          curIndex +=1
+          if (curIndex &amp;lt; urls.length - 1) {
+            downCallback()
+          } else {
+            zip.generateAsync({ type: &#39;blob&#39;})
+              .then((content) =&amp;gt; {
+                saveAs(content, &#39;test.zip&#39;)
+              })
+          }
+        })
+      }
+      downCallback()
+    }
+    const urls = [
+      {
+        filename: &#39;test1.png&#39;,
+        url: &#39;https://www.test.com/1.png&#39;
+      },
+      {
+        filename: &#39;test2.png&#39;,
+        url: &#39;https://www.test.com/2.png&#39;
+      }
+    ]
+
+    const btn = document.querySelector(&#39;#download&#39;)
+    btn.addEventListener(&#39;click&#39;, () =&amp;gt; {
+      download(urls)
+    })
+  }
+&amp;lt;/script&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实现的主要逻辑是，获取到文件名和下载地址后，循环的发起http请求，当一个请求完成后，将文件存放在zip文件内（此时zip还在内存区），然后再调起下一个http请求，知道文件全部下载完成。最后将内存区的zip文件保存到本地。
+当然，要让这个方案更加完善，还可以使用promise和axios模拟多线程并发请求，同时考虑文件下载失败后重新发起请求等多种场景，这里为了讲目光集中在JSZip，就不再扩展开讲了。
+JSZip的使用范围不止于此，它还可以运行在node环境，可以通过fileReader读取本地文件，然后进行压缩。因此，如果前端项目需要将文件打包为zip压缩包，可以在编译命令“npm run build”里面加上压缩的操作，不再使用手动压缩的方式。实现方式如下：
+读取文件夹下的文件
+如果是文件夹就用jszip创建文件夹，然后递归的执行readDir方法
+如果是文件就读取文件，jszip创建文件
+将内存区的jszip文件压缩
+删除旧的zip包，将新的压缩包写入指定路径&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const JSZip = require(&#39;jszip&#39;)
+const fs = require(&#39;fs&#39;)
+const path = require(&#39;path&#39;)
+
+const readDir = (filePath, directory) =&amp;gt; {
+  const files = fs.readdirSync(filePath)
+  files.forEach((fileName) =&amp;gt; {
+    const fileDir = path.join(filePath, fileName)
+    const stats = fs.statSync(fileDir)
+    if (stats.isFile()) {
+      const content = fs.readFileSync(fileDir, &#39;utf8&#39;)
+      directory.file(fileName, content)
+    } else if (stats.isDirectory()) {
+      const directory = jszip.folder(fileName)
+      readDir(fileDir, directory)
+    }
+  })
+}
+const jszip = new JSZip()
+const filePath = path.resolve(&#39;./cbkc-web&#39;)
+readDir(filePath, jszip)
+
+jszip
+  .generateAsync({
+    type: &#39;nodeBuffer&#39;,
+    compression: &#39;DEFLATE&#39;,
+    compressionOptions: {
+      level: 9,
+    },
+  })
+  .then((content) =&amp;gt; {
+    fs.unlinkSync(&#39;./cbkc-web.zip&#39;)
+    fs.writeFileSync(&#39;./cbkc-web.zip&#39;, content)
+  })
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;另一方面，JSZip还可以解压缩zip文件。在游戏开发中，尤其是小游戏平台，比如之前比较火热的h5小游戏，平台能够提供给游戏的包体积非常有限，这样的情况下，小游戏开发者不得不把资源压缩后存放在客户端，然后通过启动时读取文件后解压缩，这个时候就可以用到JSZip了。&lt;/p&gt;
+</description>
+                
+                
+                
+                    
+                    
+                    
+                        
+                        
+                        
+                            
+                                <category domain="https://cassiehuang.github.io/articles/">articles</category>
+                            
+                        
+                    
+                
+                
+                
+            </item>
+        
+            <item>
+                <title>前端模块化设计</title>
+                <link>https://cassiehuang.github.io/articles/frontend2/</link>
+                <guid isPermaLink="true">https://cassiehuang.github.io/articles/frontend2/</guid>
+                <pubDate>Thu, 25 Feb 2021 10:03:48 &#43;0800</pubDate>
+                
+                    <author>2694915367@qq.com (黄敏)</author>
+                
+                <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享</copyright>
+                
+                    <description>&lt;p&gt;前端模块化设计不仅是组件的设计，更是整个前端项目的模块化，在项目开发中，需要从以下几个方面考虑。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;图片资源管理，包括字体图标、雪碧图、图片转base64、图片单独引入等。&lt;/li&gt;
+&lt;li&gt;css资源管理，例如将公用的css写到commom.css里面，根据项目UI设计标准编写可复用的基础样式等。&lt;/li&gt;
+&lt;li&gt;api进行封装，统一处理请求头、处理请求响应、进行错误处理，同时将所有接口按业务逻辑分为多个文件，分模块管理。&lt;/li&gt;
+&lt;li&gt;utils文件夹存放公用函数。&lt;/li&gt;
+&lt;li&gt;项目中涉及的常量、各种key、value的映射关系，统一在constant文件夹下进行管理。&lt;/li&gt;
+&lt;li&gt;封装组件，将具有相似功能，相似设计的模块封装为组件。&lt;/li&gt;
+&lt;li&gt;封装filter，例如将接口传递的时间在组件渲染为UI要求的格式。&lt;/li&gt;
+&lt;li&gt;封装mixin，例如每个用到Page组件的页面都包括翻页相关的data、method，就可以封装一个mixin。&lt;/li&gt;
+&lt;li&gt;合理的划分界面模块，每个模块大小不应该超过500行代码。&lt;/li&gt;
+&lt;li&gt;routes统一在router文件夹下进行配置管理。&lt;/li&gt;
+&lt;li&gt;vuex中的modules支持模块化设计。&lt;/li&gt;
+&lt;li&gt;配置与应用分离，应用相关的对外的配置，存放在config文件夹下。&lt;/li&gt;
+&lt;/ol&gt;
 </description>
                 
                 

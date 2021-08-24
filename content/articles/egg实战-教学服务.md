@@ -27,19 +27,19 @@ draft: false
 ```
 
 ### 插件
-egg-view-nunjucks 渲染html的模版插件
-1. 写入plugin
-2. config.default.js 中配置
-```javascript
-config.view = {
-  mapping: {
-     '.html': 'nunjucks'
+1. egg-view-nunjucks 渲染html的模版插件
+  - 写入plugin
+  - config.default.js 中配置
+  ```javascript
+  config.view = {
+    mapping: {
+      '.html': 'nunjucks'
+    }
   }
-}
-```
-egg-jwt  生成token的插件
-egg管理token的插件，可以通过config里的match来匹配需要验证的token的路由
-egg-sequelize  辅助我们将定义好的model对象加载到app和cxt上
+  ```
+2. egg-jwt  生成token的插件
+  - egg管理token的插件，可以通过config里的match来匹配需要验证的token的路由
+3. egg-sequelize  辅助我们将定义好的model对象加载到app和cxt上
 
 ### middleware 中间件写法
 ```javascript
@@ -169,8 +169,8 @@ class UpdateCache extends Subscription {
 module.exports = UpdateCache
 ```
 ### 注意事项
-1.开发环境没有注册auth的中间件，生产环境注册了ac
-2.MVC整个结构通过router.j串联起来，router.js文件位置固定app/router.js
-3.应用层中间件：app.config.appMiddleware 框架默认层中间件:app.config.coreMiddleware
-4.所有controller必须放在app/controller目录下，可多级目录
-5.ctx.body 实际上是ctx.response.body的简写
+1. 开发环境没有注册auth的中间件，生产环境注册了ac
+2. MVC整个结构通过router.j串联起来，router.js文件位置固定app/router.js
+3. 应用层中间件：app.config.appMiddleware 框架默认层中间件:app.config.coreMiddleware
+4. 所有controller必须放在app/controller目录下，可多级目录
+5. ctx.body 实际上是ctx.response.body的简写
